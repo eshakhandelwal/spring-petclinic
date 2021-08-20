@@ -12,6 +12,15 @@ pipeline {
             sh "docker build -t ${dockerImageTag} ."
           }
       }
+    
+    stage('Compile PetClinic') {
+      steps {
+        dir('petclinicapp') {
+          sh """docker run -i --rm -v "`pwd`":/usr/src/mymaven -v "`pwd`/target:/usr/src/mymaven/target" -w /usr/src/mymaven maven:3.6.3-jdk-11 mvn -Dmaven.test.skip=true package
+cp target/*.jar ../containers/petclinic"""
+        }
+      }
+      
     stage('Deploy Container To Openshift') {
       environment {
            OPENSHIFT_CREDS = credentials('openshiftCreds')
