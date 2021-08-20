@@ -20,7 +20,7 @@ pipeline {
 cp target/*.jar ../containers/petclinic"""
         }
       }
-      
+    }
     stage('Deploy Container To Openshift') {
       environment {
            OPENSHIFT_CREDS = credentials('openshiftCreds')
