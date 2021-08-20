@@ -12,4 +12,4 @@ COPY --from=compile /usr/src/mymaven/target/*.jar /app/petclinic.jar
 COPY src/main/resources/application-mysql.properties application.properties
 EXPOSE 8080
 ENV JAVA_OPTS=""
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/urandom -jar /app.jar" ]
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/urandom -jar /app/petclinic.jar" ]
